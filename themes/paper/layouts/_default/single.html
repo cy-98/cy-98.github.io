@@ -7,7 +7,7 @@
     {{ if ne .Type "page" }}
     <div class="text-sm opacity-60">
       {{ if .Date }}
-      <time>{{ .Date | time.Format ":date_medium" }}</time>
+      <time data-type="create_timestamp" data-date="{{ .Date.Unix }}">{{ .Date | time.Format ":date_medium" }}</time>
       {{ end }}<!---->
       {{ if or .Params.Author site.Author.name }}
       <span class="mx-1">&middot;</span>

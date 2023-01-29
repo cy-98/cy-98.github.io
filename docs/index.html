@@ -39,7 +39,7 @@
   />
 
   
-  <title>My New Hugo Site</title>
+  <title>Welcome</title>
 
   
   <meta name="theme-color" />
@@ -82,7 +82,7 @@
     rel="alternate"
     type="application/rss&#43;xml"
     href="/index.xml"
-    title="My New Hugo Site"
+    title="Welcome"
   />
   
 
@@ -95,17 +95,17 @@
   
   
   
-  <meta property="og:title" content="My New Hugo Site" />
+  <meta property="og:title" content="Welcome" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
 
   
-  <meta itemprop="name" content="My New Hugo Site">
+  <meta itemprop="name" content="Welcome">
 <meta itemprop="description" content="">
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="My New Hugo Site"/>
+<meta name="twitter:title" content="Welcome"/>
 <meta name="twitter:description" content=""/>
 
   
@@ -118,7 +118,7 @@
     <a
       class="-translate-x-[1px] -translate-y-0.5 text-3xl font-bold"
       href=""
-      >My New Hugo Site</a
+      >Welcome</a
     >
     <a
       class="btn-dark ml-6 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
@@ -211,9 +211,7 @@
 
 <section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
   <h2 class="!my-0 pb-1 !leading-none">Second</h2>
-  <time class="text-sm opacity-60"
-    >Jan 29, 2023</time
-  >
+  <time class="text-sm opacity-60" data-type="create_timestamp" data-date="1674982242" >Jan 29, 2023</time>
   <a class="absolute inset-0" href="/posts/second/"></a>
 </section>
 
@@ -223,11 +221,11 @@
 
 <section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
   <h2 class="!my-0 pb-1 !leading-none">First blog</h2>
-  <time class="text-sm opacity-60"
-    >Jan 29, 2023</time
-  >
+  <time class="text-sm opacity-60" data-type="create_timestamp" data-date="1674977425" >Jan 29, 2023</time>
   <a class="absolute inset-0" href="/posts/first/"></a>
 </section>
+
+
 
 
 
@@ -241,7 +239,7 @@
 >
   <div class="mr-auto">
     &copy; 2023
-    <a class="link" href="">My New Hugo Site</a>
+    <a class="link" href="">Welcome</a>
   </div>
   <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
     >Powered by Hugo️️</a
@@ -255,5 +253,42 @@
   >
 </footer>
 
+
+    <script>
+      function countTime(second) {
+        let y = null
+        let d = null
+        let h = null
+        let m = null
+        let s = null
+
+        var leftTime = second;
+        
+        if (leftTime >= 0) {
+          y = Math.floor(leftTime / 60 / 60 / 24 / 36);
+          d = Math.floor(leftTime / 60 / 60 / 24);
+          h = Math.floor(leftTime / 60 / 60 % 24);
+          m = Math.floor(leftTime / 60 % 60);
+          s = Math.floor(leftTime % 60);
+        }
+        return { y, d, h, m, s }
+      }
+
+      function timeFmt(value) {
+        if (value.y) return [-value.y, 'year']
+        if (value.d) return [-value.d, 'day']
+        if (value.h) return [-value.h, 'hour']
+        if (value.s) return [-value.s, 'second']
+        return [0, 'second']
+      }
+
+      document.querySelectorAll('time[data-type=create_timestamp]').forEach((el) => {
+        const { date } = el.dataset;
+        const leftTime = Date.now() /1000  - date
+        const localTimeFmt = new Intl.RelativeTimeFormat('en').format(...timeFmt(countTime(leftTime)));
+        const textNode = document.createTextNode(`, ${localTimeFmt}`)
+        el.appendChild(textNode)
+      })
+    </script>
   </body>
 </html>
