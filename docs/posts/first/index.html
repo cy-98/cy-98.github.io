@@ -39,12 +39,17 @@
   />
 
   
-  <title>First blog - Welcome</title>
+  <title>邮件开发指南 - Welcome</title>
 
   
   <meta name="theme-color" />
   
-  <meta name="description" content="a write something here a" />
+  <meta name="description" content="邮件开发 邮件渲染相关 邮件发送后，经过客户端加工过，所以某些标签可能会触发客户端定义的规则。 客户端自带一些内联样式表，邮件&lt;head&gt;中携带的样式表在一些客户端会被除去，所以需要使用 inline-style 来编写样式。
+推荐使用 maizzle 能够将 tailwind class 编译为 inline-style。 避免客户端自带样式的 pre style。
+SMTP 报文发送给邮件服务商，服务商的后端会对报文做处理，图片的链接会代理一层服务，实际上请求的不是存储静态图片的服务器，而是服务商的中间层服务器。后端还会对报文的一些标签、样式做出强制替换处理。
+在不同机型渲染结果不一致，是由于服务商对 http header: User-agent 作了判断，作了一些加工处理。 Gmail 对 iPhone 5/6/7 等小屏机型会对字号进行放大处理，对元素宽高都会进行一定比例放大。 对 iPhone 11 等大屏手机则没有上述处理。 Outlook 客户端无法渲染超出 Microsoft word 不支持的样式，因为渲染引擎采用了 Microsoft word 的文本渲染引擎处理邮件报文，再返回给浏览器或者客户端渲染 (webview)。
+决定渲染结果的因素： CSS 兼容性 User-agent 在 chrome 中模拟移动手机，能够自动发送相应的 UA，服务商后端根据该 UA 决定渲染策略。很大程度上能在 PC 浏览器中模拟移动端邮件。 客户端 是否为垃圾邮件 账号是否登录 安全策略 账号收件太频繁？ 在一个邮箱账号接收了太多类似邮件，可能会触发某些客户端的策略，导致渲染不符合预期。如：发送相同的邮件报文，前后渲染结果出现偏差。 HTML 大多数邮件客户端渲染引擎都不支持 HTML5 和 CSS3 的特性，除此之外，也不支持 flex、float 、 box-shadow 等样式。
+邮件的布局基本只能依赖 table 布局，因为有的客户端还会除去 div 标签的 inline-style。 推荐使用的标签：" />
   <meta
     name="author"
     content=""
@@ -97,23 +102,38 @@
   
   
   
-  <meta property="og:title" content="First blog" />
-<meta property="og:description" content="a write something here a" />
+  <meta property="og:title" content="邮件开发指南" />
+<meta property="og:description" content="邮件开发 邮件渲染相关 邮件发送后，经过客户端加工过，所以某些标签可能会触发客户端定义的规则。 客户端自带一些内联样式表，邮件&lt;head&gt;中携带的样式表在一些客户端会被除去，所以需要使用 inline-style 来编写样式。
+推荐使用 maizzle 能够将 tailwind class 编译为 inline-style。 避免客户端自带样式的 pre style。
+SMTP 报文发送给邮件服务商，服务商的后端会对报文做处理，图片的链接会代理一层服务，实际上请求的不是存储静态图片的服务器，而是服务商的中间层服务器。后端还会对报文的一些标签、样式做出强制替换处理。
+在不同机型渲染结果不一致，是由于服务商对 http header: User-agent 作了判断，作了一些加工处理。 Gmail 对 iPhone 5/6/7 等小屏机型会对字号进行放大处理，对元素宽高都会进行一定比例放大。 对 iPhone 11 等大屏手机则没有上述处理。 Outlook 客户端无法渲染超出 Microsoft word 不支持的样式，因为渲染引擎采用了 Microsoft word 的文本渲染引擎处理邮件报文，再返回给浏览器或者客户端渲染 (webview)。
+决定渲染结果的因素： CSS 兼容性 User-agent 在 chrome 中模拟移动手机，能够自动发送相应的 UA，服务商后端根据该 UA 决定渲染策略。很大程度上能在 PC 浏览器中模拟移动端邮件。 客户端 是否为垃圾邮件 账号是否登录 安全策略 账号收件太频繁？ 在一个邮箱账号接收了太多类似邮件，可能会触发某些客户端的策略，导致渲染不符合预期。如：发送相同的邮件报文，前后渲染结果出现偏差。 HTML 大多数邮件客户端渲染引擎都不支持 HTML5 和 CSS3 的特性，除此之外，也不支持 flex、float 、 box-shadow 等样式。
+邮件的布局基本只能依赖 table 布局，因为有的客户端还会除去 div 标签的 inline-style。 推荐使用的标签：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/first/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-29T15:30:25+08:00" />
 <meta property="article:modified_time" content="2023-01-29T15:30:25+08:00" />
 
   
-  <meta itemprop="name" content="First blog">
-<meta itemprop="description" content="a write something here a"><meta itemprop="datePublished" content="2023-01-29T15:30:25+08:00" />
+  <meta itemprop="name" content="邮件开发指南">
+<meta itemprop="description" content="邮件开发 邮件渲染相关 邮件发送后，经过客户端加工过，所以某些标签可能会触发客户端定义的规则。 客户端自带一些内联样式表，邮件&lt;head&gt;中携带的样式表在一些客户端会被除去，所以需要使用 inline-style 来编写样式。
+推荐使用 maizzle 能够将 tailwind class 编译为 inline-style。 避免客户端自带样式的 pre style。
+SMTP 报文发送给邮件服务商，服务商的后端会对报文做处理，图片的链接会代理一层服务，实际上请求的不是存储静态图片的服务器，而是服务商的中间层服务器。后端还会对报文的一些标签、样式做出强制替换处理。
+在不同机型渲染结果不一致，是由于服务商对 http header: User-agent 作了判断，作了一些加工处理。 Gmail 对 iPhone 5/6/7 等小屏机型会对字号进行放大处理，对元素宽高都会进行一定比例放大。 对 iPhone 11 等大屏手机则没有上述处理。 Outlook 客户端无法渲染超出 Microsoft word 不支持的样式，因为渲染引擎采用了 Microsoft word 的文本渲染引擎处理邮件报文，再返回给浏览器或者客户端渲染 (webview)。
+决定渲染结果的因素： CSS 兼容性 User-agent 在 chrome 中模拟移动手机，能够自动发送相应的 UA，服务商后端根据该 UA 决定渲染策略。很大程度上能在 PC 浏览器中模拟移动端邮件。 客户端 是否为垃圾邮件 账号是否登录 安全策略 账号收件太频繁？ 在一个邮箱账号接收了太多类似邮件，可能会触发某些客户端的策略，导致渲染不符合预期。如：发送相同的邮件报文，前后渲染结果出现偏差。 HTML 大多数邮件客户端渲染引擎都不支持 HTML5 和 CSS3 的特性，除此之外，也不支持 flex、float 、 box-shadow 等样式。
+邮件的布局基本只能依赖 table 布局，因为有的客户端还会除去 div 标签的 inline-style。 推荐使用的标签："><meta itemprop="datePublished" content="2023-01-29T15:30:25+08:00" />
 <meta itemprop="dateModified" content="2023-01-29T15:30:25+08:00" />
-<meta itemprop="wordCount" content="5">
+<meta itemprop="wordCount" content="639">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="First blog"/>
-<meta name="twitter:description" content="a write something here a"/>
+<meta name="twitter:title" content="邮件开发指南"/>
+<meta name="twitter:description" content="邮件开发 邮件渲染相关 邮件发送后，经过客户端加工过，所以某些标签可能会触发客户端定义的规则。 客户端自带一些内联样式表，邮件&lt;head&gt;中携带的样式表在一些客户端会被除去，所以需要使用 inline-style 来编写样式。
+推荐使用 maizzle 能够将 tailwind class 编译为 inline-style。 避免客户端自带样式的 pre style。
+SMTP 报文发送给邮件服务商，服务商的后端会对报文做处理，图片的链接会代理一层服务，实际上请求的不是存储静态图片的服务器，而是服务商的中间层服务器。后端还会对报文的一些标签、样式做出强制替换处理。
+在不同机型渲染结果不一致，是由于服务商对 http header: User-agent 作了判断，作了一些加工处理。 Gmail 对 iPhone 5/6/7 等小屏机型会对字号进行放大处理，对元素宽高都会进行一定比例放大。 对 iPhone 11 等大屏手机则没有上述处理。 Outlook 客户端无法渲染超出 Microsoft word 不支持的样式，因为渲染引擎采用了 Microsoft word 的文本渲染引擎处理邮件报文，再返回给浏览器或者客户端渲染 (webview)。
+决定渲染结果的因素： CSS 兼容性 User-agent 在 chrome 中模拟移动手机，能够自动发送相应的 UA，服务商后端根据该 UA 决定渲染策略。很大程度上能在 PC 浏览器中模拟移动端邮件。 客户端 是否为垃圾邮件 账号是否登录 安全策略 账号收件太频繁？ 在一个邮箱账号接收了太多类似邮件，可能会触发某些客户端的策略，导致渲染不符合预期。如：发送相同的邮件报文，前后渲染结果出现偏差。 HTML 大多数邮件客户端渲染引擎都不支持 HTML5 和 CSS3 的特性，除此之外，也不支持 flex、float 、 box-shadow 等样式。
+邮件的布局基本只能依赖 table 布局，因为有的客户端还会除去 div 标签的 inline-style。 推荐使用的标签："/>
 
   
   
@@ -198,7 +218,7 @@
 
 <article>
   <header class="mb-20">
-    <h1 class="!my-0 pb-2.5">First blog</h1>
+    <h1 class="!my-0 pb-2.5">邮件开发指南</h1>
 
     
     <div class="text-sm opacity-60">
@@ -210,9 +230,286 @@
     
   </header>
 
-  <section><p>a
-write something here
-a</p>
+  <section><h2 id="邮件开发">邮件开发</h2>
+<h3 id="邮件渲染相关">邮件渲染相关</h3>
+<blockquote>
+<p>邮件发送后，经过客户端加工过，所以某些标签可能会触发客户端定义的规则。
+客户端自带一些内联样式表，邮件<code>&lt;head&gt;</code>中携带的样式表在一些客户端会被除去，所以需要使用 inline-style 来编写样式。</p>
+</blockquote>
+<blockquote>
+<p>推荐使用 <code>maizzle</code> 能够将 tailwind class 编译为 inline-style。
+避免客户端自带样式的 pre style。</p>
+</blockquote>
+<p>SMTP 报文发送给邮件服务商，服务商的后端会对报文做处理，图片的链接会代理一层服务，实际上请求的不是存储静态图片的服务器，而是服务商的中间层服务器。后端还会对报文的一些标签、样式做出强制替换处理。</p>
+<p>在不同机型渲染结果不一致，是由于服务商对 <code>http header: User-agent</code> 作了判断，作了一些加工处理。
+Gmail 对 iPhone 5/6/7 等小屏机型会对字号进行放大处理，对元素宽高都会进行一定比例放大。
+对 iPhone 11 等大屏手机则没有上述处理。
+Outlook 客户端无法渲染超出 Microsoft word 不支持的样式，因为渲染引擎采用了 Microsoft word 的文本渲染引擎处理邮件报文，再返回给浏览器或者客户端渲染 (webview)。</p>
+<h4 id="决定渲染结果的因素">决定渲染结果的因素：</h4>
+<ul>
+<li>CSS 兼容性</li>
+<li>User-agent
+<ul>
+<li>在 chrome 中模拟移动手机，能够自动发送相应的 UA，服务商后端根据该 UA 决定渲染策略。很大程度上能在 PC 浏览器中模拟移动端邮件。</li>
+</ul>
+</li>
+<li>客户端</li>
+<li>是否为垃圾邮件</li>
+<li>账号是否登录</li>
+<li>安全策略
+<ul>
+<li>账号收件太频繁？
+在一个邮箱账号接收了太多类似邮件，可能会触发某些客户端的策略，导致渲染不符合预期。如：发送相同的邮件报文，前后渲染结果出现偏差。</li>
+</ul>
+</li>
+</ul>
+<h3 id="html">HTML</h3>
+<p>大多数邮件客户端渲染引擎都不支持 HTML5 和 CSS3 的特性，除此之外，也不支持 flex、float 、
+box-shadow 等样式。</p>
+<p>邮件的布局基本只能依赖 table 布局，因为有的客户端还会除去 div 标签的 inline-style。
+推荐使用的标签：</p>
+<p><code>&lt;table&gt;</code>
+<code>&lt;tbody&gt;</code>
+<code>&lt;tr&gt;</code>
+<code>&lt;td&gt;</code>
+<code>&lt;p&gt;</code>
+<code>&lt;img /&gt;</code>
+<code>&lt;a&gt;</code>
+<code>&lt;h1&gt;</code>
+<code>&lt;h5&gt;</code>
+<code>&lt;em&gt;</code>
+<code>&lt;strong&gt;</code>
+<code> &lt;br /&gt;</code>
+<code>&lt;/strong&gt;``&lt;/em&gt; </code></p>
+<h3 id="css">CSS</h3>
+<p>查询 CSS 在邮件客户端的兼容性：https://www.caniemail.com/</p>
+<h4 id="不应使用的并且可以替换的-css">不应使用的并且可以替换的 CSS。</h4>
+<table>
+<thead>
+<tr>
+<th>不应使用的 CSS</th>
+<th>可以替代的 CSS</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flex</td>
+<td>inline-block</td>
+<td>table</td>
+</tr>
+<tr>
+<td>background</td>
+<td>background-image</td>
+<td>background-color</td>
+</tr>
+<tr>
+<td>float</td>
+<td>align</td>
+<td></td>
+</tr>
+<tr>
+<td>max-width</td>
+<td>width</td>
+<td><code>&lt;td width=* /&gt;</code></td>
+</tr>
+<tr>
+<td>max-height</td>
+<td>height</td>
+<td><code>&lt;tr height=* /&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;style&gt;</code> in <code>&lt;body&gt;</code></td>
+<td><code>&lt;style&gt;</code> in <code>&lt;head&gt;</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="cell-模型">cell 模型</h4>
+<p>❌ margin
+✅ padding</p>
+<p>在使用 div + 盒模型布局时，经常用到 margin + padding + border-box 或是 flex 来布局。
+在 table 布局中，td 看做一个最小的单位，作为表格中的一个 cell。
+td 的 display 等同 table-cell，宽度可以被撑起，也可以自动分配。
+td 不支持设置 margin 但支持 padding。</p>
+<p>如果要设置定宽和定高。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;300&#34;</span> <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;500&#34;</span>&gt;&lt;/<span style="color:#f92672">td</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;300&#34;</span> <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;300&#34;</span>&gt;&lt;/<span style="color:#f92672">td</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span></code></pre></div><p>处于同一 tr 内的 td ，高度取决于最高的元素。（表格等高，或是设置 rowspan 来确定高度 ）</p>
+<h4 id="space-间隙">Space 间隙</h4>
+<p>实现上下两行之间的边距</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">aria-hidden</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;30&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;font-size: 0; line-height: 0px;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &amp;nbsp;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">td</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span></code></pre></div><h4 id="垂直居中">垂直居中</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vertical-aligh:middle&#34;</span>&gt;❌ &lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">valign</span><span style="color:#f92672">=</span><span style="color:#e6db74">”&#34;middle&#34;</span>&gt; ✅&lt;/<span style="color:#f92672">td</span>&gt;
+</span></span></code></pre></div><h3 id="水平居中">水平居中</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">td</span> <span style="color:#a6e22e">align</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>&gt;&lt;/<span style="color:#f92672">td</span>&gt;
+</span></span></code></pre></div><p>地址标记
+比如下面左图展示了 footer 的 copyright 在 Gmail 的移动端的展示情况。右图是 PC 端展示情况。</p>
+<p>如左图所示，一段类似地址信息的文本被套上了 a 标签，该 a 标签具有 color: #15c 的属性。并且点击后能够跳转该地址的地图页面。对应方案如右图。 在地址信息中插入 span 标签，防止客户端解析出地址信息。</p>
+<h4 id="空白符">空白符</h4>
+<p>一般用作预览文案截断</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;font-size: 0px !important; line-height:0px !important; display: none !important; height:10px;max-height: 0px !important; overflow: hidden !important;&#34;</span>
+</span></span><span style="display:flex;"><span>&gt;
+</span></span><span style="display:flex;"><span>  \n
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div><p>空白符经过编码后，可能不会被正确的渲染。</p>
+<p>替换: ✅</p>
+<!-- raw HTML omitted -->
+<h4 id="pre-view">Pre-view</h4>
+<p>用于用户打开邮件前的预览。</p>
+<!-- raw HTML omitted -->
+<h4 id="文字颜色">文字颜色</h4>
+<ol>
+<li>
+<p>尽量使用 hex, 避免简写和小写。
+color: #FFFFFF;</p>
+</li>
+<li>
+<p>邮件对颜色透明度的兼容性不佳，尽量换算成不带透明度的色值</p>
+</li>
+</ol>
+<h4 id="小号字体">小号字体</h4>
+<p>在 Gmail 的移动端 web / 客户端内，小于 14px 的字体可能会被改成 18px。
+Outlook 允许最小字号 17px。
+即使加了一段 CSS</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">-ms-</span>text-size-adjust: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">-webkit-</span>text-size-adjust: <span style="color:#ae81ff">100</span><span style="color:#66d9ef">%</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>也并不能防止客户端从邮件报文中更改字体大小。</p>
+<h4 id="文本溢出省略">文本溢出省略</h4>
+<p><code>overflow: hidden;</code>生效的前提是盒模型有定宽和定高。</p>
+<p><code>text-overflow: ellisp; </code>生效的前提是 <code>overflow: hidden; white-space: nowrap; word-break： break-all</code> 生效。</p>
+<ul>
+<li>文本单行省略： 对元素高度限定， Gmail Yahoo 客户端可以截断溢出文本， Gmail 可以在截断后显示省略号。</li>
+<li>文本全部展示：不对元素高度做出限定</li>
+</ul>
+<h4 id="mobile-outlook-嵌套-table-丢失宽度">Mobile Outlook 嵌套 table 丢失宽度</h4>
+<p><a href="https://stackoverflow.design/email/base/mso/">https://stackoverflow.design/email/base/mso/</a>
+The main way we use MSO tags in our emails is to create “ghost tables” so hybrid emails don’t fall apart in Outlook. Hybrid design uses inline-block, max-width, min-width to stack table columns. Outlook doesn’t support these CSS properties, so we use MSO tags to create “ghost tables” that apply a fixed width just for Outlook.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!--[if mso]&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;table role=&#34;presentation&#34; cellspacing=&#34;0&#34; cellpadding=&#34;0&#34; border=&#34;0&#34; width=&#34;100%&#34;&gt;&lt;tr&gt;&lt;td width=&#34;340&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;![endif]--&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;display:inline-block; width:100%; min-width:200px; max-width:340px;&#34;</span>
+</span></span><span style="display:flex;"><span>&gt;
+</span></span><span style="display:flex;"><span>  Outlook can’t render the CSS in this DIV but other email clients can, so we
+</span></span><span style="display:flex;"><span>  wrap this in a ghost table that replicates the DIV’s desktop style. In this
+</span></span><span style="display:flex;"><span>  case, a container 340px wide.
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!--[if mso]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Without the ghost table above, Outlook would display the
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>  at 100% width. Learn how we use ghost tables to make our emails responsive.
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div><h4 id="图片加载">图片加载</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;xxx&#34;</span> /&gt;
+</span></span></code></pre></div><p>设置 width height 能够确保加载之前不会破坏模板结构。</p>
+<ul>
+<li>图片比例过大或者只是简单切图组成的邮件称为垃圾邮件的概率很大，多数邮箱对图片大小也有限制，一般图片超过 150k 后几乎所有邮箱都不会默认加载邮件中的图片</li>
+</ul>
+<h4 id="doctype">DOCTYPE</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD XHTML 1.0 Transitional//EN&#34; &#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&#34;&gt;</span>
+</span></span></code></pre></div><h3 id="响应式布局">响应式布局</h3>
+<p>使用媒体查询来检测屏幕宽度，更改元素的布局</p>
+<ul>
+<li>检测屏幕宽度而不是 UA/机型</li>
+<li>媒体查询支持度有限
+响应式设计
+响应式设计能够让邮件看起来更稳定和美观，避免嵌套的复杂布局。</li>
+<li>在 PC 端展示的邮件宽度为 600px</li>
+<li>在移动端展示的邮件宽度为 100% (outlook 需要设定固定宽度，在 if mso 条件渲染中设定为 600px)
+推荐先浏览一遍下面的 article：
+<a href="https://www.campaignmonitor.com/dev-resources/">https://www.campaignmonitor.com/dev-resources/</a>
+<a href="https://www.campaignmonitor.com/dev-resources/guides/design/">https://www.campaignmonitor.com/dev-resources/guides/design/</a>
+布局策略</li>
+</ul>
+<ol>
+<li>Mobile First</li>
+</ol>
+<ul>
+<li>Considers the mobile user a priority
+优先考虑移动用户</li>
+<li>One layout for all screen sizes
+所有尺寸的屏幕使用一个布局</li>
+<li>Single column design： 320-500px
+单列宽度： 320-500px</li>
+<li>Large text &amp; buttons
+较大的文本和按钮</li>
+<li>Generous whitespace
+丰富的空隙</li>
+<li>Short concise body copy</li>
+</ul>
+<ol start="2">
+<li>Fluid</li>
+</ol>
+<ul>
+<li>Percentage-based widths（百分比宽度）</li>
+<li>Adapts to fit the screen（适应屏幕）</li>
+<li>Text wraps automatically（文本自动换行）</li>
+</ul>
+<ol start="3">
+<li>Responsive</li>
+</ol>
+<ul>
+<li>
+<p>Resize content: make images fit, make text larger
+调整内容大小：使图像合适，使文本更大</p>
+</li>
+<li>
+<p>Hide content on mobile
+在手机端隐藏内容</p>
+</li>
+<li>
+<p>Stack columns
+将列布局堆叠</p>
+</li>
+<li>
+<p>Move a two-column design to a one-column design
+两列布局变为单列布局</p>
+</li>
+<li>
+<p>尽量避免外层容器的定高定宽，尽量以 content + padding 方式填充宽高。
+Example:<br>
+300px 宽 - 50px 高的按钮，按钮文本 18px， UI 不一定符合预期。
+因为在移动端，定高可能会被强制放大/缩小 1.x 倍。导致字体行高过高/低，文字下沉/上浮。
+文本翻译为其他语言，可能导致文字数增多换行，文本高度大于按钮高度。
+Solution:
+样式更改为：font-size: 18px; padding： 30px 60px;
+确保由 padding + content 填充， UI 一致</p>
+</li>
+<li>
+<p>避免邮件模板定宽
+邮件宽度 375px，如果大于展示宽度，有的客户端不支持横向 scroll，模板则只能展示一部分。</p>
+</li>
+<li>
+<p>outlook 中嵌套的 table 如果没有定高，会丢失宽度，所以复杂布局最好有纵列的响应式布局</p>
+</li>
+</ul>
+<h3 id="避免进入垃圾箱">避免进入垃圾箱</h3>
+<p><a href="https://stackoverflow.design/content/guidelines/grammar-and-mechanics/#buttons-and-links">https://stackoverflow.design/content/guidelines/grammar-and-mechanics/#buttons-and-links</a></p>
+<h3 id="测试工具">测试工具</h3>
+<p>chrome 浏览器可以通过浏览器模拟机型（发送一个相应手机机型的 UA）来检查 mobile web 端的渲染情况。
+<a href="https://www.accessible-email.org/checker/editor.php">accessible-email</a>
+<a href="https://www.htmlemailcheck.com/check/">HTML MAIL CHECK</a>
+<a href="https://everest.validity.com/login?r=%2Fdesign%2F">everest</a>
+Login : Validity
+发送一封测试邮件，能够在众多的真实的机型屏幕上得到截屏，检查 UI。</p>
+<p>参考 （ 推荐阅读 ）
+Stacks
+#letsfixemail
+What You Should Know About HTML Email
+Word 2007 HTML and CSS Rendering Capabilities in Outlook 2007 (Part 1 of 2)
+<a href="https://www.campaignmonitor.com/dev-resources/guides/coding-html-emails/">https://www.campaignmonitor.com/dev-resources/guides/coding-html-emails/</a></p>
 </section>
 
   

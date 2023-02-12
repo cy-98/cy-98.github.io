@@ -17,12 +17,17 @@
     </item>
     
     <item>
-      <title>First blog</title>
+      <title>邮件开发指南</title>
       <link>/posts/first/</link>
       <pubDate>Sun, 29 Jan 2023 15:30:25 +0800</pubDate>
       
       <guid>/posts/first/</guid>
-      <description>a write something here a</description>
+      <description>邮件开发 邮件渲染相关 邮件发送后，经过客户端加工过，所以某些标签可能会触发客户端定义的规则。 客户端自带一些内联样式表，邮件&amp;lt;head&amp;gt;中携带的样式表在一些客户端会被除去，所以需要使用 inline-style 来编写样式。
+推荐使用 maizzle 能够将 tailwind class 编译为 inline-style。 避免客户端自带样式的 pre style。
+SMTP 报文发送给邮件服务商，服务商的后端会对报文做处理，图片的链接会代理一层服务，实际上请求的不是存储静态图片的服务器，而是服务商的中间层服务器。后端还会对报文的一些标签、样式做出强制替换处理。
+在不同机型渲染结果不一致，是由于服务商对 http header: User-agent 作了判断，作了一些加工处理。 Gmail 对 iPhone 5/6/7 等小屏机型会对字号进行放大处理，对元素宽高都会进行一定比例放大。 对 iPhone 11 等大屏手机则没有上述处理。 Outlook 客户端无法渲染超出 Microsoft word 不支持的样式，因为渲染引擎采用了 Microsoft word 的文本渲染引擎处理邮件报文，再返回给浏览器或者客户端渲染 (webview)。
+决定渲染结果的因素： CSS 兼容性 User-agent 在 chrome 中模拟移动手机，能够自动发送相应的 UA，服务商后端根据该 UA 决定渲染策略。很大程度上能在 PC 浏览器中模拟移动端邮件。 客户端 是否为垃圾邮件 账号是否登录 安全策略 账号收件太频繁？ 在一个邮箱账号接收了太多类似邮件，可能会触发某些客户端的策略，导致渲染不符合预期。如：发送相同的邮件报文，前后渲染结果出现偏差。 HTML 大多数邮件客户端渲染引擎都不支持 HTML5 和 CSS3 的特性，除此之外，也不支持 flex、float 、 box-shadow 等样式。
+邮件的布局基本只能依赖 table 布局，因为有的客户端还会除去 div 标签的 inline-style。 推荐使用的标签：</description>
     </item>
     
   </channel>
