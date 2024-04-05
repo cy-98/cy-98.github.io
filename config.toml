@@ -1,5 +1,0 @@
-baseURL = ''
-languageCode = 'en-us'
-title = 'Welcome'
-theme = "paper"
-publishDir = './docs'
