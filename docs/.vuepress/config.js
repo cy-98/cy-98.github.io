@@ -19,8 +19,8 @@ export default defineUserConfig({
         link: '/article/',
       },
       {
-        text: 'Category',
-        link: '/category/',
+        text: 'Profile',
+        link: '/profile/',
       },
       {
         text: 'Tag',

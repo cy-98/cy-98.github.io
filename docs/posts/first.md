@@ -4,35 +4,21 @@ date: 2023-01-29T15:30:25+08:00
 draft: true
 ---
 
-## 邮件开发
-> 邮件发送后，经过客户端加工过，所以某些标签可能会触发客户端定义的规则。
-> 推荐使用 `maizzle` 能够将 tailwind class 编译为 inline-style。
-> 避免客户端自带样式的 pre style。
+邮件模板使用 HTML 开发。由于 head 标签中的 style 会被删除，所以不能够使用 class 方式，而是使用标签中的 inline-style 开发。推荐使用 `maizzle` 能够将 tailwind class 编译为 inline-style。
 
+邮件发送后，经过客户端加工过，所以某些标签可能会触发客户端定义的规则。
 
-> SMTP 报文发送给邮件服务商，服务商的后端会对报文做处理，图片的链接会代理一层服务，实际上请求的不是存储静态图片的服务器，而是服务商的中间层服务器。后端还会对报文的一些标签、样式做出强制替换处理。
+SMTP 报文发送给邮件服务商，服务商的后端会对报文做处理，图片的链接会代理一层服务，实际上请求的不是图片的原链接，而是服务商的中间层服务器做了一次转发。邮件服务端还可能会对报文的一些标签、样式做出强制替换处理。
 
-#### 决定渲染结果的因素：
+打开邮件时，由客户端对邮件模板进行渲染。
+客户端对 CSS 兼容性、服务端对 User-agent 的判断以及各种安全策略都会导致一封邮件的渲染出现差异。
+所以邮件模板的兼容性也使人头疼。
 
-- CSS 兼容性
-- User-agent
-- 客户端
-- 是否为垃圾邮件
-- 账号是否登录
-- 安全策略
+### DOCTYPE
 
-
-机型对渲染的影响：
-
-服务商对
-`http header: User-agent`
-作了判断，作了一些加工处理。
-Gmail 对 iPhone 5/6/7 等小屏机型会对字号进行放大处理，对元素宽高都会进行一定比例放大。
-
-对于 iPhone 11 等大屏手机则没有上述处理。
-
-
-Outlook 客户端无法渲染超出 Microsoft word 不支持的样式，因为渲染引擎采用了 Microsoft word 的文本渲染引擎处理邮件报文，再返回给浏览器或者客户端渲染 (webview)。
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+```
 
 
 
@@ -189,7 +175,8 @@ Outlook 允许最小字号 17px。
 ### Mobile Outlook 嵌套 table 丢失宽度
 
 https://stackoverflow.design/email/base/mso/
-The main way we use MSO tags in our emails is to create “ghost tables” so hybrid emails don’t fall apart in Outlook. Hybrid design uses inline-block, max-width, min-width to stack table columns. Outlook doesn’t support these CSS properties, so we use MSO tags to create “ghost tables” that apply a fixed width just for Outlook.
+
+> The main way we use MSO tags in our emails is to create “ghost tables” so hybrid emails don’t fall apart in Outlook. Hybrid design uses inline-block, max-width, min-width to stack table columns. Outlook doesn’t support these CSS properties, so we use MSO tags to create “ghost tables” that apply a fixed width just for Outlook.
 
 ```html
 <!--[if mso]>
@@ -220,11 +207,20 @@ Without the ghost table above, Outlook would display the
 
 - 图片比例过大或者只是简单切图组成的邮件称为垃圾邮件的概率很大，多数邮箱对图片大小也有限制，一般图片超过 150k 后几乎所有邮箱都不会默认加载邮件中的图片
 
-### DOCTYPE
 
-```html
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-```
+### 机型对渲染的影响
+
+服务商对
+`http header: User-agent`
+作了判断，作了一些加工处理。
+Gmail 对 iPhone 5/6/7 等小屏机型会对字号进行放大处理，对元素宽高都会进行一定比例放大。
+
+对于 iPhone 11 等大屏手机则没有上述处理。
+
+
+Outlook 客户端无法渲染超出 Microsoft word 不支持的样式，因为渲染引擎采用了 Microsoft word 的文本渲染引擎处理邮件报文，再返回给浏览器或者客户端渲染 (webview)。
+
+
 
 ### 响应式布局
 
